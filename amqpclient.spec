@@ -27,7 +27,6 @@
 
 %{?!python_module:%define python_module() python-%{**} python3-%{**}}
 %define         short_name amqpclient
-%define         requires python-configargparse python-pika
 Name:           %{short_name}%{?name_ext}
 Version:        0.1.0
 Release:        0
@@ -43,10 +42,8 @@ BuildRequires:  python-%{short_name}
 BuildRequires:  %{python_module devel}
 BuildRequires:  %{python_module setuptools}
 BuildRequires:  fdupes
-# test requirements -- start
-BuildRequires:       %{requires}
-# test requirements -- end
-Requires:       %{requires}
+Requires:       python-configargparse
+Requires:       python-pika
 %endif
 BuildArch:      noarch
 
@@ -73,9 +70,6 @@ amqp-rx --help
 amqp-tx --help
 %else
 %python_build
-
-%check
-%python_exec setup.py test
 
 %install
 %python_install
