@@ -61,7 +61,7 @@ Simple AMQP python CLI applications for receiving/sending
 # reason
 touch %{_sourcedir}/%{short_name}
 %else
-%setup -q -n %{short_name}-%{version}
+%setup -q
 %endif
 
 %build
@@ -72,7 +72,7 @@ amqp-tx --help
 %python_build
 
 %check
-%python_check
+%python_exec setup.py test
 
 %install
 %python_install
@@ -80,6 +80,6 @@ amqp-tx --help
 
 %files %{python_files}
 %{python_sitelib}/*
+%endif
 
 %changelog
-%endif
