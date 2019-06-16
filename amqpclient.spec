@@ -40,7 +40,7 @@ Group:          Development/Languages/Python
 Source:         https://files.pythonhosted.org/packages/source/a/%{short_name}/%{short_name}-%{version}.tar.xz
 BuildRequires:  python-rpm-macros
 %if 0%{?_test}
-BuildRequires:  python-%{short_name}
+BuildRequires:  %{short_name}
 %else
 BuildRequires:  %{python_module devel}
 BuildRequires:  %{python_module setuptools}
@@ -49,6 +49,7 @@ Requires:       python-configargparse
 Requires:       python-pika
 %endif
 BuildArch:      noarch
+Provides:       ${short_name} == %{version}
 
 %if 0%{?_test}
 %else
