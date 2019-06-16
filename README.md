@@ -1,4 +1,4 @@
-# amqpclient
+# amqpclient [![Build Status](https://travis-ci.org/okurz/amqpclient.svg?branch=master)](https://travis-ci.org/okurz/amqpclient)
 Simple AMQP python CLI applications for receiving/sending
 
 
