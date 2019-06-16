@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 import configargparse
 import os.path
 import pika
