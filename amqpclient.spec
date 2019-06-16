@@ -76,7 +76,7 @@ amqp-tx --help
 %python_expand %fdupes %{buildroot}%{$python_sitelib}
 
 %files %{python_files}
-%{python_sitelib}/*
+%{_bindir}/*
 %endif
 
 %changelog
