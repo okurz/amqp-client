@@ -25,6 +25,9 @@
 %define name_ext -test
 %endif
 
+# only care about python3 version not to need to handle alternatives
+%define skip_python2 1
+
 %{?!python_module:%define python_module() python-%{**} python3-%{**}}
 %define         short_name amqpclient
 Name:           %{short_name}%{?name_ext}
@@ -37,7 +40,7 @@ Group:          Development/Languages/Python
 Source:         https://files.pythonhosted.org/packages/source/a/%{short_name}/%{short_name}-%{version}.tar.xz
 BuildRequires:  python-rpm-macros
 %if 0%{?_test}
-BuildRequires:  python-%{short_name}
+BuildRequires:  %{short_name}
 %else
 BuildRequires:  %{python_module devel}
 BuildRequires:  %{python_module setuptools}
@@ -46,6 +49,7 @@ Requires:       python-configargparse
 Requires:       python-pika
 %endif
 BuildArch:      noarch
+Provides:       %{short_name} == %{version}
 
 %if 0%{?_test}
 %else
@@ -61,7 +65,7 @@ Simple AMQP python CLI applications for receiving/sending
 # reason
 touch %{_sourcedir}/%{short_name}
 %else
-%setup -q -n %{short_name}-%{version}
+%setup -q
 %endif
 
 %build
@@ -71,15 +75,13 @@ amqp-tx --help
 %else
 %python_build
 
-%check
-%python_check
-
 %install
 %python_install
 %python_expand %fdupes %{buildroot}%{$python_sitelib}
 
 %files %{python_files}
+%{_bindir}/*
 %{python_sitelib}/*
+%endif
 
 %changelog
-%endif
