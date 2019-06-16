@@ -14,7 +14,7 @@ try:
     # Still, this is good enough for now. A (big) alternative would be
     # gh:warner/python-versioneer
     version_git = check_output(["git", "describe", "--tags"]).rstrip().decode('ascii')
-except CalledProcessError:
+except (OSError, CalledProcessError):
     try:
         version_git = open(version_py).read().strip().split('=')[-1].replace('\'', '').strip()
     except FileNotFoundError:
