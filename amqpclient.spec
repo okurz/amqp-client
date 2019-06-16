@@ -31,7 +31,7 @@
 %{?!python_module:%define python_module() python-%{**} python3-%{**}}
 %define         short_name amqpclient
 Name:           %{short_name}%{?name_ext}
-Version:        0.1.0
+Version:        0.2.0
 Release:        0
 License:        MIT
 Summary:        Simple AMQP python CLI applications for receiving/sending
