@@ -12,33 +12,63 @@
 # license that conforms to the Open Source Definition (Version 1.9)
 # published by the Open Source Initiative.
 
-# Please submit bugfixes or comments via http://bugs.opensuse.org/
+# Please submit bugfixes or comments via https://bugs.opensuse.org/
 
+
+# Define just "test" as a package in _multibuild file to distinguish test
+# instructions here
+%if "@BUILD_FLAVOR@" == ""
+%define _test 0
+%define name_ext %nil
+%else
+%define _test 1
+%define name_ext -test
+%endif
 
 %{?!python_module:%define python_module() python-%{**} python3-%{**}}
-Name:           amqpclient
+%define         short_name amqpclient
+Name:           %{short_name}%{?name_ext}
 Version:        0.1.0
 Release:        0
 License:        MIT
 Summary:        Simple AMQP python CLI applications for receiving/sending
-Url:            https://github.com/okurz/amqpclient
+Url:            https://github.com/okurz/%{short_name}
 Group:          Development/Languages/Python
-Source:         https://files.pythonhosted.org/packages/source/a/amqpclient/amqpclient-%{version}.tar.gz
+Source:         https://files.pythonhosted.org/packages/source/a/%{short_name}/%{short_name}-%{version}.tar.gz
 BuildRequires:  python-rpm-macros
+%if 0%{?_test}
+BuildRequires:  python-%{short_name}
+%else
 BuildRequires:  %{python_module devel}
 BuildRequires:  %{python_module setuptools}
 BuildRequires:  fdupes
+Requires:       python-configargparse
+Requires:       python-pika
+%endif
 BuildArch:      noarch
 
+%if 0%{?_test}
+%else
 %python_subpackages
+%endif
 
 %description
 Simple AMQP python CLI applications for receiving/sending
 
 %prep
-%setup -q -n amqpclient-%{version}
+%if 0%{?_test}
+# workaround to prevent post/install failing assuming this file for whatever
+# reason
+touch %{_sourcedir}/%{short_name}
+%else
+%setup -q -n %{short_name}-%{version}
+%endif
 
 %build
+%if 0%{?_test}
+amqp-rx --help
+amqp-tx --help
+%else
 %python_build
 
 %check
@@ -52,3 +82,4 @@ Simple AMQP python CLI applications for receiving/sending
 %{python_sitelib}/*
 
 %changelog
+%endif
