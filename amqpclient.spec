@@ -25,6 +25,9 @@
 %define name_ext -test
 %endif
 
+# only care about python3 version not to need to handle alternatives
+%define skip_python2 1
+
 %{?!python_module:%define python_module() python-%{**} python3-%{**}}
 %define         short_name amqpclient
 Name:           %{short_name}%{?name_ext}
