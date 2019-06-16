@@ -77,6 +77,7 @@ amqp-tx --help
 
 %files %{python_files}
 %{_bindir}/*
+%{python_sitelib}/*
 %endif
 
 %changelog
