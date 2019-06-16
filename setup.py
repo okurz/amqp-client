@@ -48,6 +48,6 @@ setup(
         "License :: OSI Approved :: MIT License",
     ],
     entry_points={
-        'console_scripts': ['rx=amqpclient.rx:main'],
+        'console_scripts': ['amqp-rx=amqpclient.rx:main', 'amqp-tx=amqpclient.tx:main'],
     },
 )
