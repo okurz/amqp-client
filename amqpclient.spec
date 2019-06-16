@@ -49,7 +49,7 @@ Requires:       python-configargparse
 Requires:       python-pika
 %endif
 BuildArch:      noarch
-Provides:       ${short_name} == %{version}
+Provides:       %{short_name} == %{version}
 
 %if 0%{?_test}
 %else
