@@ -34,7 +34,7 @@ License:        MIT
 Summary:        Simple AMQP python CLI applications for receiving/sending
 Url:            https://github.com/okurz/%{short_name}
 Group:          Development/Languages/Python
-Source:         https://files.pythonhosted.org/packages/source/a/%{short_name}/%{short_name}-%{version}.tar.gz
+Source:         https://files.pythonhosted.org/packages/source/a/%{short_name}/%{short_name}-%{version}.tar.xz
 BuildRequires:  python-rpm-macros
 %if 0%{?_test}
 BuildRequires:  python-%{short_name}
