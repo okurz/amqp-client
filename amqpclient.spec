@@ -27,6 +27,8 @@
 
 # only care about python3 version not to need to handle alternatives
 %define skip_python2 1
+# Just define one python version as this is a CLI tool
+%define pythons python3
 
 %{?!python_module:%define python_module() python-%{**} python3-%{**}}
 %define         short_name amqpclient
